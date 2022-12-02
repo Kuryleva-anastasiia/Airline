@@ -1,0 +1,75 @@
+﻿@model Airline.Models.Пользователи
+
+@{
+	ViewBag.Title = "Удаление пользователя";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2>Удаление пользователя</h2>
+
+<h3>Вы уверены, что хотите удалить рейс?</h3>
+<div>
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Фамилия)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Фамилия)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Имя)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Имя)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Отчество)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Отчество)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.image)
+		</dt>
+
+		<dd>
+			@{byte[] photo = Model.image;
+				string imageSrc = null;
+				if (photo != null)
+				{
+					MemoryStream ms = new MemoryStream();
+					ms.Write(photo, 0, photo.Length);
+					string imageBase64 = Convert.ToBase64String(ms.ToArray());
+					imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+					string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+				}
+			}
+			<img alt="Image" width="150" height="150" src="@imageSrc" />
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Вход.login)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Вход.login)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" /> |
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	}
+</div>

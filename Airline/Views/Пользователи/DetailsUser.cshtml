@@ -1,0 +1,87 @@
+﻿@model Airline.Models.Пользователи
+
+@{
+	ViewBag.Title = "Личный кабинет";
+}
+
+@Styles.Render("~/Content/Site.css")
+
+
+<div class="nav">
+	<ul class="nav-list">
+		<li class="nav-list__item">@Html.ActionLink("Забронировать билет", "Create", "Заявка")</li>
+		<li class="nav-list__item">@Html.ActionLink("Личный кабинет", "DetailsUser", "Пользователи", new { Model.Вход.Id })</li>
+		<li class="nav-list__item">@Html.ActionLink("Рейсы", "IndexUser", "Рейс")</li>
+		<li class="nav-list__item">@Html.ActionLink("Полеты", "indexUser", "Полет")</li>
+	</ul>
+</div>
+
+<h2>Личный кабинет</h2>
+
+<div>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Фамилия)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Фамилия)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Имя)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Имя)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Отчество)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Отчество)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.image)
+		</dt>
+
+		<dd>
+			@{byte[] photo = Model.image;
+				string imageSrc = null;
+				if (photo != null)
+				{
+					MemoryStream ms = new MemoryStream();
+					ms.Write(photo, 0, photo.Length);
+					string imageBase64 = Convert.ToBase64String(ms.ToArray());
+					imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+					string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+				}
+			}
+			<img alt="Image" width="150" height="150" src="@imageSrc" />
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Постоянный_клиент.Количество_км)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Постоянный_клиент.Количество_км)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Постоянный_клиент.Премиальные_очки)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Постоянный_клиент.Премиальные_очки)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Изменить личную информацию", "EditUser", new { id = Model.Вход.Id })
+</p>

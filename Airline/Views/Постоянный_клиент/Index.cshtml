@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Airline.Models.Постоянный_клиент>
+
+@{
+	ViewBag.Title = "Список постоянных клиентов";
+}
+
+@Styles.Render("~/Content/Style.css")
+
+
+
+@section header {
+	<ul class="nav-list">
+		<li class="nav-list__item">@Html.ActionLink("Пользователи", "Index", "Пользователи")</li>
+		<li class="nav-list__item">@Html.ActionLink("Постоянные клиенты", "Index", "Постоянный_клиент")</li>
+		<li class="nav-list__item">@Html.ActionLink("Вход", "index", "Вход")</li>
+		<li class="nav-list__item">@Html.ActionLink("Заявки", "index", "Заявка")</li>
+		<li class="nav-list__item">@Html.ActionLink("Рейсы", "index", "Рейс")</li>
+		<li class="nav-list__item">@Html.ActionLink("Полеты", "index", "Полет")</li>
+	</ul>
+}
+
+<h2 class="title">Список постоянных клиентов</h2>
+
+<p>
+	@Html.ActionLink("Добавить постоянного клиента", "Create")
+</p>
+<table class="table table-striped">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Пользователи.Имя)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Пользователи.Отчество)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Премиальные_очки)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Количество_км)
+		</th>
+
+		<th class="last-column"></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пользователи.Фамилия)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пользователи.Имя)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пользователи.Отчество)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Премиальные_очки)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Количество_км)
+			</td>
+			<td class="last-column">
+				@Html.ActionLink("Редактировать", "Edit", new { id = item.id_клиента }) |
+				@Html.ActionLink("Детали", "Details", new { id = item.id_клиента }) |
+				@Html.ActionLink("Удалить", "Delete", new { id = item.id_клиента })
+			</td>
+		</tr>
+	}
+
+</table>

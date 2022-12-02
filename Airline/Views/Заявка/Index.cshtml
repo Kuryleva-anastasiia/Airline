@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Airline.Models.Заявка>
+
+@{
+	ViewBag.Title = "Заявки на бронирование билетов";
+}
+
+@Styles.Render("~/Content/Style.css")
+
+@section header {
+	<ul class="nav-list">
+		<li class="nav-list__item">@Html.ActionLink("Пользователи", "Index", "Пользователи")</li>
+		<li class="nav-list__item">@Html.ActionLink("Постоянные клиенты", "Index", "Постоянный_клиент")</li>
+		<li class="nav-list__item">@Html.ActionLink("Вход", "index", "Вход")</li>
+		<li class="nav-list__item">@Html.ActionLink("Заявки", "index", "Заявка")</li>
+		<li class="nav-list__item">@Html.ActionLink("Рейсы", "index", "Рейс")</li>
+		<li class="nav-list__item">@Html.ActionLink("Полеты", "index", "Полет")</li>
+	</ul>
+}
+
+<h2 class="title">Заявки на бронирование билетов</h2>
+
+@Html.ActionLink("Забронировать билет", "Create", new {  }, new { @class = "create-link" })
+
+<table class="table table-striped">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Количество_мест)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Класс)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Сумма)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Премиальные_очки)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Полет.Рейс.Пункт_вылета)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Полет.Рейс.Пункт_назначения)
+		</th>
+		<th class="last-column"></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пользователи.Фамилия)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Количество_мест)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Класс)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Сумма)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Премиальные_очки)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Полет.Рейс.Пункт_вылета)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Полет.Рейс.Пункт_назначения)
+			</td>
+			<td class="last-column">
+				@Html.ActionLink("Редактировать", "Edit", new { id = item.id }) |
+				@Html.ActionLink("Детали", "Details", new { id = item.id }) |
+				@Html.ActionLink("Удалить", "Delete", new { id = item.id })
+
+			</td>
+		</tr>
+	}
+
+</table>

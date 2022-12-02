@@ -1,0 +1,84 @@
+﻿@model Airline.Models.Заявка
+
+@{
+	ViewBag.Title = "Аннулирование заявки";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2 class="title">Аннулирование заявки</h2>
+
+<h3 class="title-3">Вы уверены, что хотите удалить рейс?</h3>
+<div>
+	<dl class="dl-horizontal">
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Класс)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Класс)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Количество_мест)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Количество_мест)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Сумма)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Сумма)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Полет.Дата)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Полет.Дата)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Полет.Рейс.Пункт_вылета)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Полет.Рейс.Пункт_вылета)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Полет.Рейс.Пункт_назначения)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Полет.Рейс.Пункт_назначения)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
+			@Html.DisplayNameFor(model => model.Пользователи.Имя)
+			@Html.DisplayNameFor(model => model.Пользователи.Отчество)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Пользователи.Фамилия)
+			@Html.DisplayFor(model => model.Пользователи.Имя)
+			@Html.DisplayFor(model => model.Пользователи.Отчество)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn form-btn" /> 
+			@Html.ActionLink("Вернуться", "Index")
+		</div>
+	}
+</div>

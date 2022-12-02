@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Airline.Models.Полет>
+
+@{
+	ViewBag.Title = "Полеты";
+}
+
+@Styles.Render("~/Content/Site.css")
+
+<div class="nav">
+	<ul class="nav-list">
+		<li class="nav-list__item">@Html.ActionLink("Забронировать билет", "Create", "Заявка")</li>
+		<li class="nav-list__item">@Html.ActionLink("Личный кабинет", "DetailsUser", "Пользователи")</li>
+		<li class="nav-list__item">@Html.ActionLink("Рейсы", "IndexUser", "Рейс")</li>
+		<li class="nav-list__item">@Html.ActionLink("Полеты", "indexUser", "Полет")</li>
+	</ul>
+</div>
+
+<h2>Полеты</h2>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Дата)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Места_эконом)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Стоимость_эконом)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Места_vip)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Стоимость_vip)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_вылета)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_назначения)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Дата)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Места_эконом)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Стоимость_эконом)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Места_vip)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Стоимость_vip)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Рейс.Пункт_вылета)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Рейс.Пункт_назначения)
+			</td>
+			<td>
+				@Html.ActionLink("Details", "DetailsUser", new { id = item.id })
+			</td>
+		</tr>
+	}
+
+</table>

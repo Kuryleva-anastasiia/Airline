@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище AirlineDatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Вход">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Заявка">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_клиента" Type="int" Nullable="false" />
+          <Property Name="id_полета" Type="int" Nullable="false" />
+          <Property Name="Класс" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Количество_мест" Type="int" Nullable="false" />
+          <Property Name="Сумма" Type="money" Nullable="false" />
+          <Property Name="Премиальные_очки" Type="int" />
+        </EntityType>
+        <EntityType Name="Полет">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_рейса" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="datetime" Nullable="false" />
+          <Property Name="Места_эконом" Type="int" Nullable="false" />
+          <Property Name="Стоимость_эконом" Type="money" Nullable="false" />
+          <Property Name="Места_vip" Type="int" Nullable="false" />
+          <Property Name="Стоимость_vip" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="image" />
+        </EntityType>
+        <EntityType Name="Постоянный клиент">
+          <Key>
+            <PropertyRef Name="id_клиента" />
+          </Key>
+          <Property Name="id_клиента" Type="int" Nullable="false" />
+          <Property Name="Премиальные_очки" Type="int" Nullable="false" />
+          <Property Name="Количество_км" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Пункт_вылета" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пункт_назначения" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Время_полета" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Количество_км" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Вход_ToTable">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Вход" Type="Self.Вход" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Вход">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_ToTable">
+          <End Role="Полет" Type="Self.Полет" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Полет">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="id_полета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_ToTable_1">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="id_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Полет_ToTable">
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="1" />
+          <End Role="Полет" Type="Self.Полет" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Полет">
+              <PropertyRef Name="id_рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Постоянный клиент_ToTable">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Постоянный клиент" Type="Self.Постоянный клиент" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Постоянный клиент">
+              <PropertyRef Name="id_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Insert_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="thirdname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoginByPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище AirlineDatabaseModelContainer">
+          <EntitySet Name="Вход" EntityType="Self.Вход" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заявка" EntityType="Self.Заявка" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Полет" EntityType="Self.Полет" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Постоянный клиент" EntityType="Self.Постоянный клиент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Рейс" EntityType="Self.Рейс" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Вход_ToTable" Association="Self.FK_Вход_ToTable">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Вход" EntitySet="Вход" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_ToTable" Association="Self.FK_Заявка_ToTable">
+            <End Role="Полет" EntitySet="Полет" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_ToTable_1" Association="Self.FK_Заявка_ToTable_1">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Полет_ToTable" Association="Self.FK_Полет_ToTable">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Полет" EntitySet="Полет" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Постоянный клиент_ToTable" Association="Self.FK_Постоянный клиент_ToTable">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Постоянный клиент" EntitySet="Постоянный клиент" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AirlineDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Вход">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Вход_ToTable" FromRole="Вход" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Заявка">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_клиента" Type="Int32" Nullable="false" />
+          <Property Name="id_полета" Type="Int32" Nullable="false" />
+          <Property Name="Класс" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Количество_мест" Type="Int32" Nullable="false" />
+          <Property Name="Сумма" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Премиальные_очки" Type="Int32" />
+          <NavigationProperty Name="Полет" Relationship="Self.FK_Заявка_ToTable" FromRole="Заявка" ToRole="Полет" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Заявка_ToTable_1" FromRole="Заявка" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Полет">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_рейса" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Места_эконом" Type="Int32" Nullable="false" />
+          <Property Name="Стоимость_эконом" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Места_vip" Type="Int32" Nullable="false" />
+          <Property Name="Стоимость_vip" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Заявка" Relationship="Self.FK_Заявка_ToTable" FromRole="Полет" ToRole="Заявка" />
+          <NavigationProperty Name="Рейс" Relationship="Self.FK_Полет_ToTable" FromRole="Полет" ToRole="Рейс" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Вход" Relationship="Self.FK_Вход_ToTable" FromRole="Пользователи" ToRole="Вход" />
+          <NavigationProperty Name="Заявка" Relationship="Self.FK_Заявка_ToTable_1" FromRole="Пользователи" ToRole="Заявка" />
+          <NavigationProperty Name="Постоянный_клиент" Relationship="Self.FK_Постоянный_клиент_ToTable" FromRole="Пользователи" ToRole="Постоянный_клиент" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Постоянный_клиент">
+          <Key>
+            <PropertyRef Name="id_клиента" />
+          </Key>
+          <Property Name="id_клиента" Type="Int32" Nullable="false" />
+          <Property Name="Премиальные_очки" Type="Int32" Nullable="false" />
+          <Property Name="Количество_км" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Постоянный_клиент_ToTable" FromRole="Постоянный_клиент" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Пункт_вылета" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Пункт_назначения" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Время_полета" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Количество_км" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Полет" Relationship="Self.FK_Полет_ToTable" FromRole="Рейс" ToRole="Полет" />
+        </EntityType>
+        <Association Name="FK_Вход_ToTable">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Вход" Type="Self.Вход" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Вход">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_ToTable">
+          <End Role="Полет" Type="Self.Полет" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Полет">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="id_полета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_ToTable_1">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="id_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Полет_ToTable">
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="1" />
+          <End Role="Полет" Type="Self.Полет" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Полет">
+              <PropertyRef Name="id_рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Постоянный_клиент_ToTable">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Постоянный_клиент" Type="Self.Постоянный_клиент" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Постоянный_клиент">
+              <PropertyRef Name="id_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AirlineDatabaseEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Вход" EntityType="Self.Вход" />
+          <EntitySet Name="Заявка" EntityType="Self.Заявка" />
+          <EntitySet Name="Полет" EntityType="Self.Полет" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+          <EntitySet Name="Постоянный_клиент" EntityType="Self.Постоянный_клиент" />
+          <EntitySet Name="Рейс" EntityType="Self.Рейс" />
+          <AssociationSet Name="FK_Вход_ToTable" Association="Self.FK_Вход_ToTable">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Вход" EntitySet="Вход" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_ToTable" Association="Self.FK_Заявка_ToTable">
+            <End Role="Полет" EntitySet="Полет" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_ToTable_1" Association="Self.FK_Заявка_ToTable_1">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Полет_ToTable" Association="Self.FK_Полет_ToTable">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Полет" EntitySet="Полет" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Постоянный_клиент_ToTable" Association="Self.FK_Постоянный_клиент_ToTable">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Постоянный_клиент" EntitySet="Постоянный_клиент" />
+          </AssociationSet>
+          <FunctionImport Name="Insert_User" ReturnType="Collection(Int32)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="surname" Mode="In" Type="String" />
+            <Parameter Name="thirdname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginByPassword" ReturnType="Collection(AirlineDatabaseModel.LoginByPassword_Result)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginByPassword1" ReturnType="Collection(Int32)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginByPassword2" ReturnType="Collection(Int32)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LoginByPassword_Result">
+          <Property Type="String" Name="login" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AirlineDatabaseModelContainer" CdmEntityContainer="AirlineDatabaseEntities1">
+          <EntitySetMapping Name="Вход">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Вход">
+              <MappingFragment StoreEntitySet="Вход">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заявка">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Заявка">
+              <MappingFragment StoreEntitySet="Заявка">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_клиента" ColumnName="id_клиента" />
+                <ScalarProperty Name="id_полета" ColumnName="id_полета" />
+                <ScalarProperty Name="Класс" ColumnName="Класс" />
+                <ScalarProperty Name="Количество_мест" ColumnName="Количество_мест" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="Премиальные_очки" ColumnName="Премиальные_очки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Полет">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Полет">
+              <MappingFragment StoreEntitySet="Полет">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_рейса" ColumnName="id_рейса" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Места_эконом" ColumnName="Места_эконом" />
+                <ScalarProperty Name="Стоимость_эконом" ColumnName="Стоимость_эконом" />
+                <ScalarProperty Name="Места_vip" ColumnName="Места_vip" />
+                <ScalarProperty Name="Стоимость_vip" ColumnName="Стоимость_vip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователи">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Пользователи">
+              <MappingFragment StoreEntitySet="Пользователи">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Постоянный_клиент">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Постоянный_клиент">
+              <MappingFragment StoreEntitySet="Постоянный клиент">
+                <ScalarProperty Name="id_клиента" ColumnName="id_клиента" />
+                <ScalarProperty Name="Премиальные_очки" ColumnName="Премиальные_очки" />
+                <ScalarProperty Name="Количество_км" ColumnName="Количество_км" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Рейс">
+            <EntityTypeMapping TypeName="AirlineDatabaseModel.Рейс">
+              <MappingFragment StoreEntitySet="Рейс">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Пункт_вылета" ColumnName="Пункт_вылета" />
+                <ScalarProperty Name="Пункт_назначения" ColumnName="Пункт_назначения" />
+                <ScalarProperty Name="Время_полета" ColumnName="Время_полета" />
+                <ScalarProperty Name="Количество_км" ColumnName="Количество_км" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Insert_User" FunctionName="Хранилище AirlineDatabaseModel.Insert_User" />
+          <FunctionImportMapping FunctionImportName="LoginByPassword2" FunctionName="Хранилище AirlineDatabaseModel.LoginByPassword" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

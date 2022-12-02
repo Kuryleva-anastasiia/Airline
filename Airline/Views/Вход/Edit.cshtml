@@ -1,0 +1,52 @@
+﻿@model Airline.Models.Вход
+
+@{
+	ViewBag.Title = "Редактирование информации";
+}
+
+@Styles.Render("~/Content/Style.css")
+
+
+
+<h2 class="title">Редактирование информации</h2>
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.Id)
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.login, htmlAttributes: new { @class = "form-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.password, htmlAttributes: new { @class = "form-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-10">
+				<input type="submit" value="Save" class="btn form-btn" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Вернуться", "Index")
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

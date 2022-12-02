@@ -1,0 +1,56 @@
+﻿@model Airline.Models.Рейс
+
+@{
+	ViewBag.Title = "Удаление рейса";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2>Удаление рейса</h2>
+
+<h3>Вы уверены, что хотите удалить рейс?</h3>
+<div>
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Пункт_вылета)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Пункт_вылета)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Пункт_назначения)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Пункт_назначения)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Время_полета)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Время_полета)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Количество_км)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Количество_км)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" /> |
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	}
+</div>

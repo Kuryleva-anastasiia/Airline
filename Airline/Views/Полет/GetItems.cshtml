@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Airline.Models.Полет>
+@{
+	Layout = null;
+}
+<table id="flightInfo" name="DateFlightList" class="table table-striped">
+
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_вылета)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_назначения)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Дата)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Места_эконом)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Стоимость_эконом)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Места_vip)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Стоимость_vip)
+		</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Рейс.Пункт_вылета, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Рейс.Пункт_назначения, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Дата, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Места_эконом, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Стоимость_эконом, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Места_vip, new { @class = "form-label col-md-2 details-info" })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Стоимость_vip, new { @class = "form-label col-md-2 details-info" })
+			</td>
+		</tr>
+	}
+</table>
+
+@section footer {}

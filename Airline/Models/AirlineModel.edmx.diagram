@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93278b44251f4992b6bb32cef7a1d96f" Name="Diagram1">
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Вход" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Заявка" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Полет" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Пользователи" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Постоянный_клиент" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineDatabaseModel.Рейс" Width="1.5" PointX="1.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="AirlineDatabaseModel.FK_Вход_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineDatabaseModel.FK_Заявка_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineDatabaseModel.FK_Заявка_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineDatabaseModel.FK_Полет_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineDatabaseModel.FK_Постоянный_клиент_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

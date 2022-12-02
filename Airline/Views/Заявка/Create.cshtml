@@ -1,0 +1,115 @@
+﻿@model Airline.Models.Заявка
+
+@{
+	ViewBag.Title = "Создание заявки на бронирование билета";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2 class="title">Создание заявки на бронирование билета</h2>
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+
+
+
+<div class="form-horizontal">
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group">
+		@Html.LabelFor(model => model.id_клиента, "Фамилия", htmlAttributes: new { @class = "form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.DropDownList("id_клиента", ViewBag.surname as SelectList, htmlAttributes: new { @class = "form-control"})
+			@Html.ValidationMessageFor(model => model.id_клиента, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.id_полета, "Номер полета", htmlAttributes: new { @class = "form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.DropDownList("id_полета", ViewBag.flightIds as SelectList, new { id = "flightId", @class = "form-control" })
+			@Html.ValidationMessageFor(model => model.id_полета, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group" id="flightInfo">
+		
+	</div>
+
+	@{ List<string> l = new List<string>();
+		l.Add("эконом");
+		l.Add("vip");
+		SelectList list = new SelectList(l);}
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.Класс, "Класс", htmlAttributes: new { @class = "form-label col-md-2" })
+		<div class="col-md-10 m-t-10">
+			@Html.DropDownList("Класс", list, htmlAttributes: new { @class = "form-control"@*, id = "classList"*@ })
+			@Html.ValidationMessageFor(model => model.Класс, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.Количество_мест, htmlAttributes: new { @class = "form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Количество_мест, new { htmlAttributes = new { @class = "form-control"@*, id = "seatCount" *@} })
+			@Html.ValidationMessageFor(model => model.Количество_мест, "", new { @class = "text-danger" })
+		</div>
+	</div>
+
+	@*<button id="CountSum" value="Посчитать стоимость" class="btn form-btn">@Html.ActionLink("Посчитать стоимость", "Create", new { seats = 10 })</button>*@
+
+	@*<div class="form-group">
+		@Html.LabelFor(model => model.Сумма, htmlAttributes: new { @class = "form-label col-md-2" })
+		<span class="sum-label">@ViewBag.sum</span>
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.Премиальные_очки, htmlAttributes: new { @class = "form-label col-md-2" })
+		<span class="points-label">@ViewBag.points</span>
+	</div>*@
+
+	<div class="form-group">
+		<div class="col-md-10">
+			<input type="submit" value="Создать" class="btn form-btn"/>
+
+		</div>
+	</div>
+</div>
+}
+
+<div>
+	@Html.ActionLink("Вернуться", "Index")
+</div>
+
+@section scripts{
+
+	<script type="text/javascript">
+    $(function () {
+
+        $('#flightId').change(function () {
+            // получаем выбранный id
+			var id = $(this).val();
+			console.log(id);
+            $.ajax({
+				type: 'GET',
+                url: '@Url.Content("~/Полет/GetItems/")' + id,
+                success: function (data) {
+
+                    // заменяем содержимое присланным частичным представлением
+                    $('#flightInfo').replaceWith(data);
+					}
+			});
+			//$('#createLink').click(function () {
+			//	var classValue = $("#classList").val();
+			//	var seatCount = $("#seatCount").val();
+			//	this.href = this.href.replace("xxx", classValue);
+			//	this.href = this.href.replace("seats", seatCount);
+			//	console.log(classValue, seatCount);
+			//});
+		})
+    })
+	</script>
+
+}

@@ -1,0 +1,58 @@
+﻿@model Airline.Models.Заявка
+
+@{
+	ViewBag.Title = "Детали заявки";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2 class="title">Детали заявки</h2>
+
+<div>
+	<dl class="dl-horizontal">
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Пользователи.Фамилия)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Класс)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Класс)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Количество_мест)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Количество_мест)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Сумма)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Сумма)
+		</dd>
+
+		<dt class="details-label">
+			@Html.DisplayNameFor(model => model.Премиальные_очки)
+		</dt>
+
+		<dd class="details-info">
+			@Html.DisplayFor(model => model.Премиальные_очки)
+		</dd>
+
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.id }) |
+	@Html.ActionLink("Вернуться", "Index")
+</p>

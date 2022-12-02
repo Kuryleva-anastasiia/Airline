@@ -1,0 +1,79 @@
+﻿@model Airline.Models.Полет
+
+@{
+    ViewBag.Title = "Детали полета";
+}
+
+<h2>Детали полета</h2>
+
+<div>
+    <h4>Полет</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Дата)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Дата)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Места_эконом)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Места_эконом)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Стоимость_эконом)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Стоимость_эконом)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Места_vip)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Места_vip)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Стоимость_vip)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Стоимость_vip)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_вылета)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Рейс.Пункт_вылета)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Рейс.Пункт_назначения)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Рейс.Пункт_назначения)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Рейс.Время_полета)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Рейс.Время_полета)
+		</dd>
+
+	</dl>
+</div>
+<p>
+    @Html.ActionLink("Вернуться", "IndexUser")
+</p>

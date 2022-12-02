@@ -1,0 +1,61 @@
+﻿@model Airline.Models.Постоянный_клиент
+
+@{
+	ViewBag.Title = "Личная информация клиента";
+}
+@Styles.Render("~/Content/Style.css")
+
+<h2>Личная информация клиента</h2>
+
+<div>
+	<h4>Постоянный_клиент</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Пользователи.Фамилия)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Пользователи.Имя)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Пользователи.Имя)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Пользователи.Отчество)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Пользователи.Отчество)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Премиальные_очки)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Премиальные_очки)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Количество_км)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Количество_км)
+		</dd>
+
+
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.id_клиента }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

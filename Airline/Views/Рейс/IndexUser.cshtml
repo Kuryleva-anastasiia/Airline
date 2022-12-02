@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Airline.Models.Рейс>
+
+@{
+	ViewBag.Title = "Рейсы";
+	var рейс = Model.First();
+	
+}
+
+@Styles.Render("~/Content/Site.css")
+
+
+
+<div class="nav">
+	<ul class="nav-list">
+		<li class="nav-list__item">@Html.ActionLink("Забронировать билет", "Create", "Заявка")</li>
+		<li class="nav-list__item">@Html.ActionLink("Личный кабинет", "DetailsUser", "Пользователи")</li>
+		<li class="nav-list__item">@Html.ActionLink("Рейсы", "IndexUser", "Рейс")</li>
+		<li class="nav-list__item">@Html.ActionLink("Полеты", "indexUser", "Полет")</li>
+	</ul>
+</div>
+
+
+<h2>Рейсы</h2>
+
+@using (Html.BeginForm())
+{
+	<p>
+		@Html.TextBox("SearchString")
+		<input type="submit" value="Найти" />
+	</p>
+}
+
+
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.ActionLink("Пункт_вылета", "Index", new { sortOrder = ViewBag.DepartureSortParm })
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Пункт_назначения)
+		</th>
+		<th>
+			@Html.ActionLink("Время полета", "Index", new { sortOrder = ViewBag.TimeSortParm })
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Количество_км)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пункт_вылета)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Пункт_назначения)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Время_полета)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Количество_км)
+			</td>
+			<td>
+				@Html.ActionLink("Details", "Details", new { id = item.id })
+			</td>
+		</tr>
+	}
+
+</table>
