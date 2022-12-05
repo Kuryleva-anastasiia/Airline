@@ -5,7 +5,7 @@
 }
 @Styles.Render("~/Content/Style.css")
 
-<h2>Редактирование</h2>
+<h2 class="title">Редактирование</h2>
 
 
 @using (Html.BeginForm())
@@ -33,15 +33,15 @@
 		</div>
 
 		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Save" class="btn btn-default" />
+			<div class="col-md-10">
+				<input type="submit" value="Save" class="btn form-btn" />
 			</div>
 		</div>
 	</div>
 }
 
 <div>
-	@Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Вернуться", "Index")
 </div>
 
 @section Scripts {

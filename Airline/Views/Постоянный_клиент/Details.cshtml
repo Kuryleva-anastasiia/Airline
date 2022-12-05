@@ -5,49 +5,47 @@
 }
 @Styles.Render("~/Content/Style.css")
 
-<h2>Личная информация клиента</h2>
+<h2 class="title">Личная информация клиента</h2>
 
 <div>
-	<h4>Постоянный_клиент</h4>
-	<hr />
 	<dl class="dl-horizontal">
-		<dt>
+		<dt class="details-label">
 			@Html.DisplayNameFor(model => model.Пользователи.Фамилия)
 		</dt>
 
-		<dd>
+		<dd class="details-info">
 			@Html.DisplayFor(model => model.Пользователи.Фамилия)
 		</dd>
 
-		<dt>
+		<dt class="details-label">
 			@Html.DisplayNameFor(model => model.Пользователи.Имя)
 		</dt>
 
-		<dd>
+		<dd class="details-info">
 			@Html.DisplayFor(model => model.Пользователи.Имя)
 		</dd>
 
-		<dt>
+		<dt class="details-label">
 			@Html.DisplayNameFor(model => model.Пользователи.Отчество)
 		</dt>
 
-		<dd>
+		<dd class="details-info">
 			@Html.DisplayFor(model => model.Пользователи.Отчество)
 		</dd>
 
-		<dt>
+		<dt class="details-label">
 			@Html.DisplayNameFor(model => model.Премиальные_очки)
 		</dt>
 
-		<dd>
+		<dd class="details-info">
 			@Html.DisplayFor(model => model.Премиальные_очки)
 		</dd>
 
-		<dt>
+		<dt class="details-label">
 			@Html.DisplayNameFor(model => model.Количество_км)
 		</dt>
 
-		<dd>
+		<dd class="details-info">
 			@Html.DisplayFor(model => model.Количество_км)
 		</dd>
 
@@ -56,6 +54,6 @@
 	</dl>
 </div>
 <p>
-	@Html.ActionLink("Edit", "Edit", new { id = Model.id_клиента }) |
-	@Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.id_клиента }) |
+	@Html.ActionLink("Вернуться", "Index")
 </p>

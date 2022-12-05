@@ -29,6 +29,7 @@ namespace Airline.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Пользователи пользователи = db.Пользователи.Find(id);
+
             if (пользователи == null)
             {
                 return HttpNotFound();

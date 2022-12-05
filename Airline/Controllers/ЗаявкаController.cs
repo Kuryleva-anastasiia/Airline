@@ -157,7 +157,32 @@ namespace Airline.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(заявка).State = EntityState.Modified;
+                var ticket = db.Заявка.Find(заявка.id);
+                var flight = db.Полет.Find(ticket.id_полета);
+                var user = db.Постоянный_клиент.Find(ticket.id_клиента);
+
+                заявка.id_клиента = user.id_клиента;
+                заявка.id_полета = flight.id;
+
+                if (заявка.Класс == "эконом")
+                {
+                    заявка.Сумма = flight.Стоимость_эконом * заявка.Количество_мест;
+                    заявка.Премиальные_очки = (int)заявка.Сумма / 100 * 5;
+                }
+                else {
+                    заявка.Сумма = flight.Стоимость_vip * заявка.Количество_мест;
+                    заявка.Премиальные_очки = (int)заявка.Сумма / 100 * 5;
+
+                }
+                if (user != null)
+                {
+                    var points = db.Заявка.Find(заявка.id);
+                    var pointsCount = points.Премиальные_очки;
+                    user.Премиальные_очки += (int)заявка.Премиальные_очки - (int)pointsCount;
+                }
+                db.Entry(заявка).State = EntityState.Added;
+                db.Заявка.Remove(ticket);
+                db.Заявка.Add(заявка);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

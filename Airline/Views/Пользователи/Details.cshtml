@@ -77,8 +77,67 @@
 		</dd>
 
 	</dl>
+
+	<div>
+		<h3 class="title-3">Заявки пользователя</h3>
+	</div>
+
+	<table id="tbl" class="table table-striped">
+		<tr>
+			<th>
+				Пункт вылета
+			</th>
+			<th>
+				Пункт назначения
+			</th>
+			<th>
+				Класс
+			</th>
+			<th>
+				Количество мест
+			</th>
+			<th>
+				Дата
+			</th>
+			<th>
+				Сумма
+			</th>
+			<th class="last-column"></th>
+		</tr>
+		@foreach (var item in Model.Заявка)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Полет.Рейс.Пункт_вылета)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Полет.Рейс.Пункт_назначения)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Класс)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Количество_мест)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Полет.Дата)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Сумма)
+				</td>
+				<td class="last-column">
+					@Html.ActionLink("Редактировать", "Edit", new { id = item.id }) |
+					@Html.ActionLink("Детали", "Details", new { id = item.id }) |
+					@Html.ActionLink("Удалить", "Delete", new { id = item.id })
+				</td>
+			</tr>
+		}
+
+
+	</table>
 </div>
 <p>
 	@Html.ActionLink("Редактировать", "Edit", new { id = Model.id }) |
 	@Html.ActionLink("Вернуться", "Index")
 </p>
+

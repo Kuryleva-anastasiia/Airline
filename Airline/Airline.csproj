@@ -196,6 +196,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\airplane.png" />
+    <Content Include="images\airport-bg.jpg" />
     <Content Include="Models\AirlineModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AirlineModel.edmx</DependentUpon>
